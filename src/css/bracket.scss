@@ -1,0 +1,105 @@
+$participant-state-width: 5em;
+$participant-state-font-size-multiplier: .7;
+$participant-name-width: 9em;
+
+$match-width: 2 * $participant-state-width+ $participant-name-width - 1em;
+$match-height: 7em;
+
+$won-color: darkblue;
+$lost-color: darkred;
+
+body {
+  font-size: 14px;
+}
+
+#bracketContainer {
+  width: 100%;
+  overflow: auto;
+  scroll-behavior: smooth;
+  #bracket {
+    display: flex;
+    flex-direction: row;
+    .round {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      margin-right: .5em;
+      .roundNumber {
+        margin: 0 0 .2em;
+        font-weight: bold;
+      }
+      .matches {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+    }
+  }
+}
+
+.matches {
+  .matchDate {
+    display: inline-block;
+    height: 1em;
+    margin: 0 0 .2em;
+  }
+  .match {
+    width: $match-width;
+    height: $match-height;
+    .header {
+      display: flex;
+      justify-content: space-between;
+      span.matchName {
+        display: inline-block;
+        height: 1em;
+      }
+    }
+    .participants {
+      border: 1px solid green;
+      padding: .25em;
+      text-align: center;
+      div {
+        span {
+          display: inline-block;
+        }
+        .name {
+          width: $participant-name-width;
+
+        }
+        .from, .next {
+          font-size: #{$participant-state-font-size-multiplier}em;
+          width: $participant-state-width;
+          &:empty {
+            &:before, &:after {
+              content: ''
+            }
+          }
+        }
+        .from {
+          text-align: right;
+          &:after {
+            content: ' →'
+          }
+        }
+        .next {
+          text-align: left;
+          &:before {
+            content: '→ '
+          }
+        }
+        &.won {
+          .name, .next {
+            color: $won-color;
+          }
+        }
+        &.lost {
+          .name, .next {
+            color: $lost-color;
+          }
+        }
+      }
+    }
+  }
+}

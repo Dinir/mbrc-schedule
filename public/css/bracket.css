@@ -1,0 +1,66 @@
+@charset "UTF-8";
+body {
+  font-size: 14px; }
+
+#bracketContainer {
+  width: 100%;
+  overflow: auto;
+  scroll-behavior: smooth; }
+  #bracketContainer #bracket {
+    display: flex;
+    flex-direction: row; }
+    #bracketContainer #bracket .round {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-right: .5em; }
+      #bracketContainer #bracket .round .roundNumber {
+        margin: 0 0 .2em;
+        font-weight: bold; }
+      #bracketContainer #bracket .round .matches {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; }
+
+.matches .matchDate {
+  display: inline-block;
+  height: 1em;
+  margin: 0 0 .2em; }
+
+.matches .match {
+  width: 18em;
+  height: 7em; }
+  .matches .match .header {
+    display: flex;
+    justify-content: space-between; }
+    .matches .match .header span.matchName {
+      display: inline-block;
+      height: 1em; }
+  .matches .match .participants {
+    border: 1px solid green;
+    padding: .25em;
+    text-align: center; }
+    .matches .match .participants div span {
+      display: inline-block; }
+    .matches .match .participants div .name {
+      width: 9em; }
+    .matches .match .participants div .from, .matches .match .participants div .next {
+      font-size: 0.7em;
+      width: 5em; }
+      .matches .match .participants div .from:empty:before, .matches .match .participants div .from:empty:after, .matches .match .participants div .next:empty:before, .matches .match .participants div .next:empty:after {
+        content: ''; }
+    .matches .match .participants div .from {
+      text-align: right; }
+      .matches .match .participants div .from:after {
+        content: ' →'; }
+    .matches .match .participants div .next {
+      text-align: left; }
+      .matches .match .participants div .next:before {
+        content: '→ '; }
+    .matches .match .participants div.won .name, .matches .match .participants div.won .next {
+      color: darkblue; }
+    .matches .match .participants div.lost .name, .matches .match .participants div.lost .next {
+      color: darkred; }
+
+/*# sourceMappingURL=bracket.css.map */
