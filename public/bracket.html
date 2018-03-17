@@ -21,7 +21,7 @@
 <body>
 <h1>MBRC Tournament Bracket</h1>
 <div id="bracketContainer">
-  <div id="bracket">
+  <!--<div id="bracket">
     <div id="round01" class="round">
       <div class="roundNumber">Round 1</div>
       <div class="matches">
@@ -148,7 +148,7 @@
       <div class="matches">
         <div class="match">
           <div class="header">
-
+            <div class="matchDate"></div>
             <span class="matchName">A</span>
           </div>
           <div class="participants">
@@ -392,7 +392,6 @@
       <div class="matches">
         <div class="match">
           <div class="header">
-
             <span class="matchName">A</span>
           </div>
           <div class="participants">
@@ -453,14 +452,25 @@
         </div>
       </div>
     </div>
-  </div>
+  </div>-->
 </div>
 
-<script src="./js/horizontalScrollToElements.js"></script>
 <script>
   var bracketContainer = document.getElementById('bracketContainer');
+</script>
+<script src="./js/initBracket.js"></script>
+<script src="./js/addBracketContent.js"></script>
+<script src="./js/horizontalScrollToElements.js"></script>
+<script>
+  bracketContainer.appendChild(
+    b._el
+  );
+
   bracketContainer.addEventListener('wheel',
-    horizontalScrollToElements(bracketContainer, document.getElementById('bracket').children)
+    horizontalScrollToElements(
+      bracketContainer,
+      b._el.children
+    )
   );
 </script>
 </body>

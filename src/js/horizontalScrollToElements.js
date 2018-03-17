@@ -22,6 +22,5 @@ const horizontalScrollToElements = (container, elements) => {
       } while(elements[currentElement].offsetLeft > container.scrollLeftMax);
     }
     container.scrollLeft = elements[currentElement].offsetLeft;
-    console.log(currentElement);
   };
 };

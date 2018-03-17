@@ -1,6 +1,8 @@
 @charset "UTF-8";
 body {
-  font-size: 14px; }
+  font-size: 14px;
+  background-color: darkgreen;
+  color: white; }
 
 #bracketContainer {
   width: 100%;
@@ -18,10 +20,19 @@ body {
         margin: 0 0 .2em;
         font-weight: bold; }
       #bracketContainer #bracket .round .matches {
-        height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center; }
+        #bracketContainer #bracket .round .matches.upper {
+          height: 28em; }
+          #bracketContainer #bracket .round .matches.upper .match .participants {
+            border: 1px solid darkblue;
+            background-color: #000046; }
+        #bracketContainer #bracket .round .matches.lower {
+          height: 14em; }
+          #bracketContainer #bracket .round .matches.lower .match .participants {
+            border: 1px solid #8b8b00;
+            background-color: #464600; }
 
 .matches .matchDate {
   display: inline-block;
@@ -43,7 +54,7 @@ body {
     text-align: center; }
     .matches .match .participants div span {
       display: inline-block; }
-    .matches .match .participants div .name {
+    .matches .match .participants div .id {
       width: 9em; }
     .matches .match .participants div .from, .matches .match .participants div .next {
       font-size: 0.7em;
@@ -58,9 +69,9 @@ body {
       text-align: left; }
       .matches .match .participants div .next:before {
         content: '→ '; }
-    .matches .match .participants div.won .name, .matches .match .participants div.won .next {
-      color: darkblue; }
-    .matches .match .participants div.lost .name, .matches .match .participants div.lost .next {
-      color: darkred; }
+    .matches .match .participants div.won .id, .matches .match .participants div.won .next {
+      color: lightblue; }
+    .matches .match .participants div.lost .id, .matches .match .participants div.lost .next {
+      color: #e6aeae; }
 
 /*# sourceMappingURL=bracket.css.map */

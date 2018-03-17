@@ -2,14 +2,20 @@ $participant-state-width: 5em;
 $participant-state-font-size-multiplier: .7;
 $participant-name-width: 9em;
 
-$match-width: 2 * $participant-state-width+ $participant-name-width - 1em;
+$match-width: 2 * $participant-state-width + $participant-name-width - 1em;
 $match-height: 7em;
 
-$won-color: darkblue;
-$lost-color: darkred;
+$upper-match-border-color: darkblue;
+$upper-match-color: #000046;
+$lower-match-border-color: #8b8b00;
+$lower-match-color: #464600;
+$won-player-color: lightblue;
+$lost-player-color: #e6aeae;
 
 body {
   font-size: 14px;
+  background-color: darkgreen;
+  color: white;
 }
 
 #bracketContainer {
@@ -30,10 +36,27 @@ body {
         font-weight: bold;
       }
       .matches {
-        height: 100%;
         display: flex;
         flex-direction: column;
         justify-content: center;
+        &.upper {
+          height: $match-height * 4;
+          .match {
+            .participants {
+              border: 1px solid $upper-match-border-color;
+              background-color: $upper-match-color;
+            }
+          }
+        }
+        &.lower {
+          height: $match-height * 2;
+          .match {
+            .participants {
+              border: 1px solid $lower-match-border-color;
+              background-color: $lower-match-color;
+            }
+          }
+        }
       }
     }
   }
@@ -64,7 +87,7 @@ body {
         span {
           display: inline-block;
         }
-        .name {
+        .id {
           width: $participant-name-width;
 
         }
@@ -90,13 +113,13 @@ body {
           }
         }
         &.won {
-          .name, .next {
-            color: $won-color;
+          .id, .next {
+            color: $won-player-color;
           }
         }
         &.lost {
-          .name, .next {
-            color: $lost-color;
+          .id, .next {
+            color: $lost-player-color;
           }
         }
       }

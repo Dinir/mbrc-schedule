@@ -23,7 +23,6 @@ var horizontalScrollToElements = function horizontalScrollToElements(container, 
       } while (elements[currentElement].offsetLeft > container.scrollLeftMax);
     }
     container.scrollLeft = elements[currentElement].offsetLeft;
-    console.log(currentElement);
   };
 };
 //# sourceMappingURL=horizontalScrollToElements.js.map
