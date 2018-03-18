@@ -23,42 +23,22 @@ b.m(4,0,1).setDate('2018-03-19 15:30');
 b.m(5,0,1).setDate('2018-03-19 17:15');
 b.m(6,1,1).setDate('2018-03-19 18:15');
 
-b.m(1, 1, 1).updatePlayers({
-  1: {i: 'DinirNertan'},
-  2: {i: 'Macaw45'},
-  3: {i: 'Morricane'},
-  4: {i: 'Ingvarz'},
-});
-b.m(1, 1, 2).updatePlayers({
-  1: {i: 'Goati'},
-  2: {i: 'Kale'},
-  3: {i: 'bk202'},
-  4: {i: 'Icarus'},
-});
-b.m(1, 1, 3).updatePlayers({
-  1: {i: 'SoltyD'},
-  2: {i: 'Hanasu'},
-  3: {i: 'Dan'},
-  4: {i: 'Olemars'},
-});
-b.m(1, 1, 4).updatePlayers({
-  1: {i: '@@@@@@@@'},
-  2: {i: 'Megagoat'},
-  3: {i: 'Neo_Antwon'},
-  4: {i: 'Nasty_Wolverine'},
-});
+b.m(1,1,1).updatePlayers(participants.A);
+b.m(1,1,2).updatePlayers(participants.B);
+b.m(1,1,3).updatePlayers(participants.C);
+b.m(1,1,4).updatePlayers(participants.D);
 
 //// Round 1
 // A
 b.updateResult({
   match: [1,1,1],
-  result: [1,0,0,1],
+  result: matchResults['A'],
   next: [ [2,1,1], [2,0,1] ]
 });
 // B
 b.updateResult({
   match: [1,1,2],
-  result: [0,1,1,0],
+  result: matchResults['B'],
   next: [ [2,1,1], [2,0,1] ]
 });
 
@@ -66,13 +46,13 @@ b.updateResult({
 // LB A/B
 b.updateResult({
   match: [2,0,1],
-  result: [0,1,1,0],
+  result: matchResults['LB A/B'],
   next: [ [3,0,1], null ]
 });
 // UB-A
 b.updateResult({
   match: [2,1,1],
-  result: [0,1,1,0],
+  result: matchResults['UB-A'],
   next: [ [4,1,1], [3,0,2] ]
 });
 
@@ -80,13 +60,13 @@ b.updateResult({
 // C
 b.updateResult({
   match: [1,1,3],
-  result: [1,0,1,0],
+  result: matchResults['C'],
   next: [ [2,1,2], [2,0,2] ]
 });
 // D
 b.updateResult({
   match: [1,1,4],
-  result: [0,0,1,1],
+  result: matchResults['D'],
   next: [ [2,1,2], [2,0,2] ]
 });
 
@@ -94,13 +74,13 @@ b.updateResult({
 // LB C/D
 b.updateResult({
   match: [2,0,2],
-  result: [0,0,1,1],
+  result: matchResults['LB C/D'],
   next: [ [3,0,2], null ]
 });
 // UB-B
 b.updateResult({
   match: [2,1,2],
-  result: [0,1,1,0],
+  result: matchResults['UB-B'],
   next: [ [4,1,1], [3,0,1] ]
 });
 
@@ -108,13 +88,13 @@ b.updateResult({
 // LB-A
 b.updateResult({
   match: [3,0,1],
-  result: [0,1,1,0],
+  result: matchResults['LB-A'],
   next: [ [4,0,1], null ]
 });
 // LB-B
 b.updateResult({
   match: [3,0,2],
-  result: [0,1,0,1],
+  result: matchResults['LB-B'],
   next: [ [4,0,1], null ]
 });
 
@@ -122,26 +102,26 @@ b.updateResult({
 // LBSF
 b.updateResult({
   match: [4,0,1],
-  result: [0,1,0,1],
+  result: matchResults['LBSF'],
   next: [ [5,0,1], null ]
 });
 // UBSF
 b.updateResult({
   match: [4,1,1],
-  result: [0,1,0,1],
+  result: matchResults['UBSF'],
   next: [ [6,1,1], [5,0,1] ]
 });
 
 //// Round 5
 b.updateResult({
   match: [5,0,1],
-  result: [0,1,0,1],
+  result: matchResults['LBGF'],
   next: [ [6,1,1], null ]
 });
 
 //// Round 6
 b.updateResult({
   match: [6,1,1],
-  result: [1,1,0,0],
+  result: matchResults['GF'],
   next: [ 'WON', null ]
 });

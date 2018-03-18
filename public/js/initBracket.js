@@ -315,10 +315,4 @@ var Bracket = function (_Element3) {
 
   return Bracket;
 }(Element);
-
-var testMatch = new Match('LB-A');
-console.log(testMatch);
-
-var testRound = new Round(3, ['A', 'B'], ['C', 'D']);
-console.log(testRound);
 //# sourceMappingURL=initBracket.js.map
