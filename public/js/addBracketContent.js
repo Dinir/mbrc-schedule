@@ -1,81 +1,147 @@
+/* eslint-disable no-undef */
 var b = new Bracket(
-  [ ['A','B','C','D'], []                   ],
-  [ ['UB-A', 'UB-B'],  ['LB A/B', 'LB C/D'] ],
-  [ [],                ['LB-A', 'LB-C']     ],
-  [ ['UBF'],           ['LBF']              ],
-  [ [],                ['LBGF']             ],
-  [ ['GF'],            []                   ]
+  [ ['A', 'B', 'C', 'D'], [] ],
+  [ ['UB-A', 'UB-B'], ['LB A/B', 'LB C/D'] ],
+  [ [], ['LB-A', 'LB-B'] ],
+  [ ['UBF'], ['LBF'] ],
+  [ [], ['LBGF'] ],
+  [ ['GF'], [] ],
 );
 
-b.m(1, 1, 1).setDate('Sunday 21:15').updatePlayers({
+b.m(1,1,1).setDate('2018-03-18 12:15');
+b.m(1,1,2).setDate('2018-03-18 13:00');
+b.m(1,1,3).setDate('2018-03-18 17:00');
+b.m(1,1,4).setDate('2018-03-18 17:45');
+b.m(2,1,1).setDate('2018-03-18 14:45');
+b.m(2,1,2).setDate('2018-03-18 19:30');
+b.m(2,0,1).setDate('2018-03-18 14:00');
+b.m(2,0,2).setDate('2018-03-18 18:45');
+b.m(3,0,1).setDate('2018-03-19 13:45');
+b.m(3,0,2).setDate('2018-03-19 14:30');
+b.m(4,1,1).setDate('2018-03-19 16:15');
+b.m(4,0,1).setDate('2018-03-19 15:30');
+b.m(5,0,1).setDate('2018-03-19 17:15');
+b.m(6,1,1).setDate('2018-03-19 18:15');
+
+b.m(1, 1, 1).updatePlayers({
   1: {i: 'DinirNertan'},
   2: {i: 'Macaw45'},
   3: {i: 'Morricane'},
   4: {i: 'Ingvarz'},
 });
-b.m(1, 1, 2).setDate('Sunday 22:00').updatePlayers({
+b.m(1, 1, 2).updatePlayers({
   1: {i: 'Goati'},
   2: {i: 'Kale'},
   3: {i: 'bk202'},
   4: {i: 'Icarus'},
 });
-b.m(1, 1, 3).setDate('Monday 02:00').updatePlayers({
+b.m(1, 1, 3).updatePlayers({
   1: {i: 'SoltyD'},
   2: {i: 'Hanasu'},
   3: {i: 'Dan'},
   4: {i: 'Olemars'},
 });
-b.m(1, 1, 4).setDate('Monday 02:45').updatePlayers({
+b.m(1, 1, 4).updatePlayers({
   1: {i: '@@@@@@@@'},
   2: {i: 'Megagoat'},
   3: {i: 'Neo_Antwon'},
   4: {i: 'Nasty_Wolverine'},
 });
 
-b.m(1, 1, 1).updateResult(
-  [1, 0, 0, 1], ['UB-A', 'LB A/B']
-);
-b.m(2, 1, 1).updatePlayers({
-  1: {f: 'A', i: 'DinirNertan'},
-  2: {f: 'A', i: 'Ingvarz'},
+//// Round 1
+// A
+b.updateResult({
+  match: [1,1,1],
+  result: [1,0,0,1],
+  next: [ [2,1,1], [2,0,1] ]
 });
-b.m(2, 0, 1).updatePlayers({
-  1: {f: 'A', i: 'Macaw45'},
-  2: {f: 'A', i: 'Morricane'},
-});
-
-b.m(1, 1, 2).updateResult(
-  [0, 1, 1, 0], ['UB-A', 'LB A/B']
-);
-b.m(2, 1, 1).updatePlayers({
-  3: {f: 'B', i: 'Kale'},
-  4: {f: 'B', i: 'bk202'}
-});
-b.m(2, 0, 1).updatePlayers({
-  3: {f: 'B', i: 'Goati'},
-  4: {f: 'B', i: 'Icarus'}
+// B
+b.updateResult({
+  match: [1,1,2],
+  result: [0,1,1,0],
+  next: [ [2,1,1], [2,0,1] ]
 });
 
-b.m(1, 1, 3).updateResult(
-  [1, 0, 1, 0], ['UB-B', 'LB C/D']
-);
-b.m(2, 1, 2).updatePlayers({
-  1: {f: 'C', i: 'SoltyD'},
-  2: {f: 'C', i: 'Dan'}
+//// Round 2
+// LB A/B
+b.updateResult({
+  match: [2,0,1],
+  result: [0,1,1,0],
+  next: [ [3,0,1], null ]
 });
-b.m(2, 0, 2).updatePlayers({
-  1: {f: 'C', i: 'Hanasu'},
-  2: {f: 'C', i: 'Olemars'}
+// UB-A
+b.updateResult({
+  match: [2,1,1],
+  result: [0,1,1,0],
+  next: [ [4,1,1], [3,0,2] ]
 });
 
-b.m(1, 1, 4).updateResult(
-  [0, 0, 1, 1], ['UB-B', 'LB C/D']
-);
-b.m(2, 1, 2).updatePlayers({
-  3: {f: 'D', i: 'Neo_Antwon'},
-  4: {f: 'D', i: 'Nasty_Wolverine'}
+//// Round 1
+// C
+b.updateResult({
+  match: [1,1,3],
+  result: [1,0,1,0],
+  next: [ [2,1,2], [2,0,2] ]
 });
-b.m(2, 0, 2).updatePlayers({
-  3: {f: 'D', i: '@@@@@@@@'},
-  4: {f: 'D', i: 'Megagoat'}
+// D
+b.updateResult({
+  match: [1,1,4],
+  result: [0,0,1,1],
+  next: [ [2,1,2], [2,0,2] ]
+});
+
+//// Round 2
+// LB C/D
+b.updateResult({
+  match: [2,0,2],
+  result: [0,0,1,1],
+  next: [ [3,0,2], null ]
+});
+// UB-B
+b.updateResult({
+  match: [2,1,2],
+  result: [0,1,1,0],
+  next: [ [4,1,1], [3,0,1] ]
+});
+
+//// Round 3
+// LB-A
+b.updateResult({
+  match: [3,0,1],
+  result: [0,1,1,0],
+  next: [ [4,0,1], null ]
+});
+// LB-B
+b.updateResult({
+  match: [3,0,2],
+  result: [0,1,0,1],
+  next: [ [4,0,1], null ]
+});
+
+//// Round 4
+// LBSF
+b.updateResult({
+  match: [4,0,1],
+  result: [0,1,0,1],
+  next: [ [5,0,1], null ]
+});
+// UBSF
+b.updateResult({
+  match: [4,1,1],
+  result: [0,1,0,1],
+  next: [ [6,1,1], [5,0,1] ]
+});
+
+//// Round 5
+b.updateResult({
+  match: [5,0,1],
+  result: [0,1,0,1],
+  next: [ [6,1,1], null ]
+});
+
+//// Round 6
+b.updateResult({
+  match: [6,1,1],
+  result: [1,1,0,0],
+  next: [ 'WON', null ]
 });

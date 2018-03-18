@@ -2,11 +2,17 @@
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var userTimezone = moment.tz.guess();
 
 var Element = function () {
   function Element(tag, className, content) {
@@ -99,7 +105,10 @@ var Match = function (_Element) {
   _createClass(Match, [{
     key: 'setDate',
     value: function setDate(date) {
-      if (date) this.header.matchDate._el.innerText = date;
+      if (date) {
+        this._date = moment.utc(date);
+        this.header.matchDate._el.innerText = this._date.tz(userTimezone).format('ddd HH:mm');
+      }
       return this;
     }
   }, {
@@ -142,6 +151,17 @@ var Match = function (_Element) {
       }
       return this;
     }
+  }, {
+    key: 'addPlayerToEmptySlot',
+    value: function addPlayerToEmptySlot(player) {
+      var slotToFill = 1;
+      while (this.participants[slotToFill].id._el.innerText) {
+        slotToFill++;
+      }
+      if (slotToFill > 4) return this;
+      this.updatePlayers(_defineProperty({}, slotToFill, player));
+      return this;
+    }
 
     /**
      *
@@ -154,9 +174,18 @@ var Match = function (_Element) {
     value: function updateResult(winLoses, nextMatches) {
       for (var index = 1; index <= winLoses.length; index++) {
         this.participants[index]._el.className = winLoses[index - 1] ? 'won' : 'lost';
-        // this.participants[index].next._el.innerText = winLoses[index-1]? nextMatches[0]: nextMatches[1];
         this.participants[index].next._el.innerText = nextMatches[winLoses[index - 1] ? 0 : 1];
       }
+    }
+  }, {
+    key: 'date',
+    get: function get() {
+      return this._date;
+    }
+  }, {
+    key: 'name',
+    get: function get() {
+      return this.header.matchName._el.innerText;
     }
   }]);
 
@@ -218,6 +247,69 @@ var Bracket = function (_Element3) {
     key: 'm',
     value: function m(round, side, match) {
       return this.rounds[round][side ? 'upper' : 'lower'][match];
+    }
+
+    /**
+     *
+     * @param {Object} matchResult
+     * @param {number[]} matchResult.match
+     * @param {number[]} matchResult.result
+     * @param {(number[]|string|null)[]} matchResult.nextMatch
+     * @returns {Bracket}
+     */
+
+  }, {
+    key: 'updateResult',
+    value: function updateResult(matchResult) {
+      var match = matchResult.match,
+          result = matchResult.result,
+          next = matchResult.next;
+
+      if (!result) return this;
+      var currentMatch = this.m.apply(this, _toConsumableArray(match));
+      var winnerMatch = void 0,
+          loserMatch = void 0;
+      if (Array.isArray(next[0])) {
+        winnerMatch = this.m.apply(this, _toConsumableArray(next[0]));
+      } else if (typeof next[0] === 'string' || next[0] === null) {
+        winnerMatch = next[0];
+      } else {
+        return this;
+      }
+      if (Array.isArray(next[1])) {
+        loserMatch = this.m.apply(this, _toConsumableArray(next[1]));
+      } else if (typeof next[1] === 'string' || next[1] === null) {
+        loserMatch = next[1];
+      } else {
+        return this;
+      }
+      var winners = [];
+      var losers = [];
+
+      for (var index = 1; index <= result.length; index++) {
+        var hasWon = result[index - 1];
+        var nextMatch = hasWon ? winnerMatch : loserMatch;
+        var playerFinished = typeof nextMatch === 'string' || nextMatch === null;
+        currentMatch.participants[index]._el.className = hasWon ? 'won' : 'lost';
+
+        currentMatch.participants[index].next._el.innerText = playerFinished ? nextMatch : nextMatch.name;
+
+        if (!playerFinished) {
+          if (hasWon) winners.push(currentMatch.participants[index].id._el.innerText);else losers.push(currentMatch.participants[index].id._el.innerText);
+        }
+      }
+      if (typeof winnerMatch !== 'string' && winnerMatch !== null) winners.forEach(function (name) {
+        winnerMatch.addPlayerToEmptySlot({
+          f: currentMatch.name, i: name
+        });
+      });
+      if (typeof loserMatch !== 'string' && loserMatch !== null) losers.forEach(function (name) {
+        loserMatch.addPlayerToEmptySlot({
+          f: currentMatch.name, i: name
+        });
+      });
+
+      return this;
     }
   }]);
 
