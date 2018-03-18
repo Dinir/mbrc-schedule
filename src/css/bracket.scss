@@ -1,8 +1,10 @@
+$font-size: 14px;
+
 $participant-state-width: 5em;
 $participant-state-font-size-multiplier: .7;
 $participant-name-width: 9em;
 
-$match-width: 2 * $participant-state-width + $participant-name-width - 1em;
+$match-width: 2 * $participant-state-width + $participant-name-width - 2em;
 $match-height: 7em;
 
 $upper-match-border-color: darkblue;
@@ -10,19 +12,26 @@ $upper-match-color: #000046;
 $lower-match-border-color: #8b8b00;
 $lower-match-color: #464600;
 $won-player-color: lightblue;
-$lost-player-color: #e6aeae;
+$lost-player-color: #e6e6ae;
 
 body {
-  font-size: 14px;
+  font-size: $font-size;
   background-color: darkgreen;
   color: white;
 }
 
 #bracketContainer {
+  position: relative;
   width: 100%;
+  height: $match-height * 6 + 3em;
   overflow: auto;
   scroll-behavior: smooth;
+  #flowLines {
+
+  }
   #bracket {
+    position: absolute;
+    top: 0;
     display: flex;
     flex-direction: row;
     .round {
@@ -30,7 +39,7 @@ body {
       flex-direction: column;
       justify-content: center;
 
-      margin-right: .5em;
+      margin-right: 3em;
       .roundNumber {
         margin: 0 0 .2em;
         font-weight: bold;
