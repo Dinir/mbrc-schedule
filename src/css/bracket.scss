@@ -7,6 +7,7 @@ $participant-name-width: 9em;
 $match-width: 2 * $participant-state-width + $participant-name-width - 2em;
 $match-height: 7em;
 
+$default-text-color: white;
 $upper-match-border-color: darkblue;
 $upper-match-color: #000046;
 $lower-match-border-color: #8b8b00;
@@ -15,12 +16,13 @@ $won-player-color: lightblue;
 $lost-player-color: #e6e6ae;
 
 body {
-  font-size: $font-size;
   background-color: darkgreen;
-  color: white;
 }
 
 #bracketContainer {
+  font-size: $font-size;
+  color: $default-text-color;
+
   position: relative;
   width: 100%;
   height: $match-height * 6 + 3em;
@@ -120,6 +122,8 @@ body {
           &:before {
             content: '→ '
           }
+        }
+        .id, .next {
         }
         &.won {
           .id, .next {

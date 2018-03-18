@@ -105,10 +105,16 @@ var Match = function (_Element) {
   _createClass(Match, [{
     key: 'setDate',
     value: function setDate(date) {
-      if (date) {
-        this._date = moment.utc(date);
-        this.header.matchDate._el.innerText = this._date.tz(userTimezone).format('ddd HH:mm');
+      var actualDate = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+
+      if (!date) return this;
+      if (!actualDate) {
+        this._date = date;
+        this.header.matchDate._el.innerText = date;
+        return this;
       }
+      this._date = moment.utc(date);
+      this.header.matchDate._el.innerText = this._date.tz(userTimezone).format('ddd D, HH:mm');
       return this;
     }
   }, {

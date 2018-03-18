@@ -95,12 +95,16 @@ class Match extends Element {
     if(name) this.setName(name);
   }
 
-  setDate(date) {
-    if(date) {
-      this._date = moment.utc(date);
-      this.header.matchDate._el.innerText =
-        this._date.tz(userTimezone).format('ddd HH:mm');
+  setDate(date, actualDate = true) {
+    if(!date) return this;
+    if(!actualDate) {
+      this._date = date;
+      this.header.matchDate._el.innerText = date;
+      return this;
     }
+    this._date = moment.utc(date);
+    this.header.matchDate._el.innerText =
+      this._date.tz(userTimezone).format('ddd D, HH:mm');
     return this;
   }
 

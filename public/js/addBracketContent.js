@@ -16,12 +16,12 @@ b.m(2,1,1).setDate('2018-03-18 14:45');
 b.m(2,1,2).setDate('2018-03-18 19:30');
 b.m(2,0,1).setDate('2018-03-18 14:00');
 b.m(2,0,2).setDate('2018-03-18 18:45');
-b.m(3,0,1).setDate('2018-03-19 13:45');
-b.m(3,0,2).setDate('2018-03-19 14:30');
-b.m(4,1,1).setDate('2018-03-19 16:15');
-b.m(4,0,1).setDate('2018-03-19 15:30');
-b.m(5,0,1).setDate('2018-03-19 17:15');
-b.m(6,1,1).setDate('2018-03-19 18:15');
+b.m(3,0,1).setDate('Sun 25, 00:00?', false);
+b.m(3,0,2).setDate('Sun 25, 00:00?', false);
+b.m(4,1,1).setDate('Sun 25, 00:00?', false);
+b.m(4,0,1).setDate('Sun 25, 00:00?', false);
+b.m(5,0,1).setDate('Sun 25, 00:00?', false);
+b.m(6,1,1).setDate('Sun 25, 00:00?', false);
 
 b.m(1,1,1).updatePlayers(participants.A);
 b.m(1,1,2).updatePlayers(participants.B);
