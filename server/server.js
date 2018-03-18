@@ -15,8 +15,11 @@ app.use(
 );
 hbs.registerPartials(path.join(__dirname, '../views/partials'));
 
-app.get('/', (req, res) => {
+/*app.get('/', (req, res) => {
   res.render('index.hbs', {});
+});*/
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public', 'bracket.html'));
 });
 
 app.listen(process.env.PORT, () => {

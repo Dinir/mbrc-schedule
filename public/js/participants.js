@@ -2,7 +2,7 @@ var participants = {
   A: {
     1: {i: 'DinirNertan'},
     2: {i: 'Macaw45'},
-    3: {i: 'Morricane'},
+    3: {i: 'T4N3'},
     4: {i: 'Ingvarz'}
   },
   B: {
@@ -14,11 +14,11 @@ var participants = {
   C: {
     1: {i: 'SoltyD'},
     2: {i: 'Hanasu'},
-    3: {i: 'Dan'},
+    3: {i: 'Teasel'},
     4: {i: 'Olemars'}
   },
   D: {
-    1: {i: '@@@@@@@@'},
+    1: {i: 'Grayst_'},
     2: {i: 'Megagoat'},
     3: {i: 'Neo_Antwon'},
     4: {i: 'Nasty_Wolverine'}
