@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta name="viewport"
+  content="width=device-width" />
+<title>MBRC Tournament Bracket</title>
+<link rel="shortcut icon"
+  href="./MBRCBunny.ico">
+<!--<link rel="apple-touch-icon"
+          href="./appiconios.png"/>
+    <link rel="apple-touch-icon-precomposed"
+          href="./appiconandroid.png"/>
+    <link rel="stylesheet" href="./your.css">-->
+<link rel="stylesheet" href="./css/normalize800.css">
+<link rel="stylesheet" href="./css/bracket.css">
+<style>
+
+</style>
+</head>
+
+<body>
+<!--<h1>MBRC Tournament Bracket</h1>-->
+<div id="bracketContainer">
+  <!--<canvas id="flowLines"></canvas>-->
+  <div id="flowLines" style="
+    width: 1608px; height: 607px;
+  "></div>
+</div>
+
+<script>
+  var bracketContainer = document.getElementById('bracketContainer');
+</script>
+<script src="./js/moment.js"></script>
+<script src="./js/moment-timezone.js"></script>
+<script src="./js/moment-timezone-with-data.js"></script>
+<script src="./js/initBracket.js"></script>
+<script src="./js/participants.js"></script>
+<script src="./js/matchResultsAhead.js"></script>
+<script src="./js/addBracketContent.js"></script>
+<!--<script src="./js/horizontalScrollToElements.js"></script>-->
+<script>
+  bracketContainer.appendChild(
+    b._el
+  );
+
+  /*bracketContainer.addEventListener('wheel',
+    horizontalScrollToElements(
+      bracketContainer,
+      b._el.children
+    )
+  );*/
+
+  b.m(3, 0, 1).setDate('2018-03-19 19:00');
+  b.m(3, 0, 2).setDate('2018-03-19 15:50');
+  b.m(4, 1, 1).setDate('2018-03-19 23:30');
+  b.m(4, 0, 1).setDate('2018-03-20 23:00');
+
+  // scroll to Round 3
+  bracketContainer.scrollLeft =
+    b._el.children[2].offsetLeft;
+
+  window.onload = function() {
+    const fl = document.getElementById('flowLines');
+    fl.style.backgroundImage = 'url(./img/flowLines.png)';
+  }
+</script>
+</body>
+
+<!--<script src="./js/drawFlowLines.js"></script>-->
+
+</html>

@@ -22,6 +22,10 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public', 'bracket.html'));
 });
 
+app.get('/ahead', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public', 'bracketAhead.html'));
+});
+
 app.listen(process.env.PORT, () => {
   console.log(
     `${new Date().toString()}: Server is up on port ${process.env.PORT}.`
