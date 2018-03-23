@@ -23,6 +23,10 @@ const MatchSchema = new mongoose.Schema({
   },
   players: [{
     _id: mongoose.Schema.Types.ObjectId,
+    point: {
+      type: Number,
+      default: 0
+    },
     result: {
       type: Boolean,
       default: null
