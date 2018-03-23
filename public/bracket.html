@@ -39,22 +39,19 @@
 <script src="./js/participants.js"></script>
 <script src="./js/matchResults.js"></script>
 <script src="./js/addBracketContent.js"></script>
-<!--<script src="./js/horizontalScrollToElements.js"></script>-->
+<script src="./js/horizontalScrollToElements.js"></script>
 <script>
   bracketContainer.appendChild(
     b._el
   );
 
-  /*bracketContainer.addEventListener('wheel',
+  bracketContainer.addEventListener('wheel',
     horizontalScrollToElements(
       bracketContainer,
-      b._el.children
+      b._el.children,
+      2
     )
-  );*/
-
-  // scroll to Round 3
-  bracketContainer.scrollLeft =
-    b._el.children[2].offsetLeft;
+  );
 
   window.onload = function() {
     const fl = document.getElementById('flowLines');
